@@ -61,7 +61,7 @@ The passcode is defined by the `PASSCODE` constant at the top of the script. Cha
 | Problems | `#problems` | Problem statements, team leaders choose |
 | Projects | `#projects` | Gallery with voting and track filter |
 | Submit Project | `#submission` | Project pitch form |
-| Organizer | `#organizer` | Admin dashboard (passcode) |
+| Organizer | `#organizer` | Admin dashboard (passcode - mate2026) |
 
 Navigation uses the URL `#hash`, so each page is directly linkable.
 
