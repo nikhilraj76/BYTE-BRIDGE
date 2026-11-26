@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<!-- HackMate - same look and features, written with basic CSE326 (Unit I-V) code -->
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HackMate - Hackathon Platform</title>
+
+<style>
+/* HackMate - CSS topics: selectors, box model, flexbox, grid, variables, pseudo-classes, responsive design, transitions, animations */
+:root{
+    --bg:#0b091b;
+    --panel:#100d20;
+    --accent:#c084fc;
+    --accent-light:#d8b4fe;
+    --muted:#aaa6c5;
+    --border:#40305c;
+    --border-strong:#7042a5;
+    --line:#35244f;
+    --card-top:#251c40;
+    --card-bottom:#121126;
+    --chip:#30204d;
+    --green:#4ade80;
+}
+
+/* =================================
+   HACKMATE COMPLETE STYLE FIX
+================================= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:white;overflow-x:hidden;}
+
+/* HEADER */
+header{background:var(--panel);color:white;padding:20px 8%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;}
+header h1{color:var(--accent);font-size:30px;}
+nav a{color:#d5cbe8;text-decoration:none;margin:10px;font-weight:bold;}
+nav a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{min-height:650px;padding:90px 8%;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:50px;text-align:left;position:relative;overflow:hidden;
+background:radial-gradient(circle at 15% 30%,rgba(124,58,237,0.3),transparent 40%),radial-gradient(circle at 85% 60%,rgba(59,130,246,0.2),transparent 40%),var(--bg);}
+.hero-content{position:relative;z-index:2;}
+.hero-tag{display:inline-block;padding:10px 18px;margin-bottom:25px;border-radius:30px;color:var(--accent-light);background:#211638;border:1px solid var(--border-strong);font-size:12px;letter-spacing:1px;font-weight:bold;}
+.hero h2{font-size:60px;line-height:1.15;margin-bottom:25px;color:white;}
+.hero h2 span{background:linear-gradient(90deg,var(--accent),#818cf8,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-content p{color:var(--muted);font-size:17px;line-height:1.8;margin-bottom:30px;max-width:490px;}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:15px;}
+.btn{background:linear-gradient(110deg,#9333ea,#6366f1);color:white;padding:14px 27px;border:none;border-radius:10px;cursor:pointer;font-weight:bold;text-decoration:none;display:inline-block;transition:0.3s;}
+.btn:hover{transform:translateY(-4px);box-shadow:0 8px 25px #7135bd;}
+.secondary-btn{padding:14px 25px;border:1px solid #7554a7;border-radius:10px;color:white;text-decoration:none;font-weight:bold;transition:0.3s;}
+.secondary-btn:hover{background:var(--chip);border-color:var(--accent);}
+.hero-features{display:flex;flex-wrap:wrap;gap:15px;margin-top:30px;color:#c4b5fd;font-size:12px;}
+
+/* DASHBOARD */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:430px;}
+.glow-circle{position:absolute;width:300px;height:300px;border-radius:50%;background:#7836d8;filter:blur(110px);opacity:0.3;}
+.main-card{position:relative;z-index:2;width:100%;max-width:420px;padding:28px;border-radius:20px;background:#1c1736;border:1px solid #7550a8;box-shadow:0 20px 60px #05030e;animation:floatCard 5s ease-in-out infinite;}
+.dashboard-heading{display:flex;justify-content:space-between;align-items:center;color:#c4b5fd;font-size:11px;font-weight:bold;letter-spacing:1px;}
+.live-dot{color:var(--green);}
+.main-card h3{color:white;font-size:23px;margin:24px 0 8px;}
+.main-card > p{color:var(--muted);font-size:13px;margin-bottom:20px;}
+.person{display:flex;align-items:center;gap:12px;padding:15px 0;border-top:1px solid #39304e;}
+.person strong{display:block;color:white;font-size:13px;}
+.person small{display:block;color:var(--muted);font-size:11px;margin-top:5px;}
+.avatar{min-width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:bold;font-size:17px;}
+.avatar-one{background:#49317d;color:var(--accent-light);}
+.avatar-two{background:#243c75;color:#93c5fd;}
+.avatar-three{background:#176456;color:#6ee7b7;}
+.online{margin-left:auto;color:var(--green);font-size:11px;}
+.match-footer{background:var(--chip);color:var(--accent-light);padding:13px;border-radius:9px;text-align:center;font-size:12px;margin-top:12px;}
+
+/* FLOATING BADGES */
+.floating-badge{position:absolute;z-index:3;background:#211b3b;border:1px solid #7550a8;padding:13px;border-radius:12px;color:white;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,0.4);}
+.badge-top{top:25px;right:-10px;}
+.badge-bottom{bottom:25px;left:-25px;}
+
+/* ANIMATION */
+@keyframes floatCard{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+/* FEATURES */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;padding:55px 8%;background:#0d0b1d;}
+.feature-card{background:linear-gradient(145deg,var(--card-top),var(--card-bottom));padding:30px;border-radius:16px;border:1px solid var(--border);text-align:center;transition:0.3s;}
+.feature-card:hover{transform:translateY(-8px);border-color:#a855f7;}
+.feature-icon{font-size:40px;margin-bottom:18px;}
+.feature-card h3{color:var(--accent-light);margin-bottom:12px;}
+.feature-card p{color:var(--muted);font-size:14px;line-height:1.7;}
+
+/* ALL OTHER SECTIONS */
+section:not(.hero):not(.features){padding:70px 8%;background-color:var(--bg);}
+.section-title{text-align:center;color:var(--accent-light);font-size:32px;margin-bottom:15px;}
+.section-description{text-align:center;color:var(--muted);margin-bottom:35px;}
+
+/* SEARCH */
+.filter-box{max-width:700px;margin:0 auto 35px;text-align:center;}
+input,select,textarea{width:100%;padding:13px;margin:10px 0;background:#17152d;color:white;border:1px solid var(--border);border-radius:9px;font-size:15px;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#a855f7;box-shadow:0 0 10px #542b82;}
+input::placeholder,textarea::placeholder{color:var(--muted);}
+.filter-box select{width:250px;}
+
+/* PARTICIPANT AND TEAM CARDS */
+.card-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px;}
+.card{background:linear-gradient(145deg,var(--card-top),var(--card-bottom));padding:27px;border-radius:15px;border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,0.3);transition:0.3s;}
+.card:hover{transform:translateY(-7px);border-color:#a855f7;box-shadow:0 10px 30px rgba(147,51,234,0.2);}
+.card h3{color:#c4b5fd;margin-bottom:15px;}
+.card p{color:#b4b0cc;margin-bottom:12px;line-height:1.6;}
+.skill{display:inline-block;background:var(--chip);color:var(--accent-light);padding:7px 13px;border:1px solid var(--border-strong);border-radius:20px;margin:5px 0;font-size:13px;}
+
+/* RECRUITMENT */
+.recruitment{background:var(--panel) !important;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+/* FORM */
+.form-container{max-width:650px;margin:auto;background:linear-gradient(145deg,var(--card-top),var(--card-bottom));padding:35px;border-radius:16px;border:1px solid var(--border);box-shadow:0 10px 35px rgba(0,0,0,0.4);}
+.form-container label{display:block;color:var(--accent-light);font-weight:bold;margin-top:15px;}
+textarea{resize:vertical;min-height:110px;}
+.submit-btn{width:100%;margin-top:20px;background:linear-gradient(90deg,#9333ea,#4f46e5);color:white;padding:15px;border:none;border-radius:10px;cursor:pointer;font-size:16px;font-weight:bold;}
+.submit-btn:hover{box-shadow:0 5px 25px #7135bd;}
+
+/* MESSAGES */
+.message{text-align:center;color:var(--accent);margin-top:20px;font-weight:bold;}
+
+/* FOOTER */
+footer{background:#080814;color:var(--muted);text-align:center;padding:30px;border-top:1px solid var(--line);}
+footer h3{color:var(--accent);margin-bottom:10px;}
+
+/* RESPONSIVE */
+@media(max-width:850px){
+.hero{grid-template-columns:1fr;text-align:center;}
+.hero-content p{margin-left:auto;margin-right:auto;}
+.hero-buttons,.hero-features{justify-content:center;}
+.hero-visual{width:100%;min-height:400px;}
+.hero h2{font-size:42px;}
+.features{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+header{flex-direction:column;text-align:center;}
+nav a{display:inline-block;margin:8px;}
+.hero h2{font-size:36px;}
+section:not(.hero):not(.features){padding:45px 5%;}
+.form-container{padding:22px;}
+.filter-box select{width:100%;}
+}
+
+/* TEAM MEMBERS + HOVER TOOLTIP */
+.team-members{margin:16px 0 18px;}
+.team-members-title{display:block;color:#9690b1;font-size:11px;letter-spacing:1px;margin-bottom:10px;}
+.member-list{display:flex;flex-wrap:wrap;gap:10px;}
+.member{position:relative;cursor:pointer;outline:none;}
+.member-avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:bold;font-size:14px;background:#49317d;color:var(--accent-light);border:2px solid #7550a8;transition:0.3s;}
+.member:nth-child(2) .member-avatar{background:#243c75;color:#93c5fd;}
+.member:nth-child(3) .member-avatar{background:#176456;color:#6ee7b7;}
+.member:hover .member-avatar,.member:focus .member-avatar{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 6px 18px rgba(147,51,234,0.4);}
+.member-tooltip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(6px);width:190px;padding:12px 14px;background:#211b3b;border:1px solid #7550a8;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5);text-align:left;opacity:0;visibility:hidden;pointer-events:none;transition:0.25s;z-index:20;}
+.member-tooltip::after{content:"";position:absolute;top:100%;left:50%;margin-left:-6px;border:6px solid transparent;border-top-color:#7550a8;}
+.member:hover .member-tooltip,.member:focus .member-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.member-tooltip strong{display:block;color:white;font-size:13px;}
+.member-role{display:block;color:var(--accent);font-size:11px;font-weight:bold;margin:3px 0 8px;}
+.member-task{display:block;color:#b4b0cc;font-size:12px;line-height:1.5;}
+
+/* RECRUITMENT BOARD COLUMNS */
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;align-items:start;}
+.board-column{background:rgba(28,23,54,0.55);border:1px solid var(--line);border-top:3px solid #a855f7;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:20px;}
+.board-column.col-frontend{border-top-color:#38bdf8;}
+.board-column.col-backend{border-top-color:#a855f7;}
+.board-column.col-aiml{border-top-color:var(--green);}
+.board-column.col-uiux{border-top-color:#f472b6;}
+.board-column.col-hardware{border-top-color:#fbbf24;}
+.column-header{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#f0eaff;font-weight:bold;font-size:17px;}
+.column-count{white-space:nowrap;background:var(--chip);color:var(--accent-light);border:1px solid var(--border-strong);border-radius:20px;padding:3px 11px;font-size:12px;}
+.column-empty{color:#9690b1;font-size:13px;text-align:center;padding:20px 10px;border:1px dashed var(--border);border-radius:12px;}
+
+/* EXTRA FEATURES */
+.btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none;}
+.card-container .no-results{grid-column:1/-1;}
+
+/* countdown */
+section.countdown{padding:45px 8% !important;text-align:center;background:var(--panel) !important;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.countdown-label{color:var(--accent-light);font-weight:bold;letter-spacing:2px;font-size:13px;margin-bottom:22px;}
+.countdown-boxes{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;}
+.count-box{min-width:95px;padding:18px 12px;border-radius:14px;background:linear-gradient(145deg,var(--card-top),var(--card-bottom));border:1px solid var(--border-strong);}
+.count-box span{display:block;font-size:34px;font-weight:bold;color:white;}
+.count-box small{color:var(--muted);font-size:12px;letter-spacing:1px;}
+
+/* collapsible forms (register / create team) */
+details.form-panel{max-width:650px;margin:0 auto 35px;background:linear-gradient(145deg,var(--card-top),var(--card-bottom));border:1px solid var(--border);border-radius:16px;padding:18px 28px;}
+details.form-panel summary{cursor:pointer;color:var(--accent-light);font-weight:bold;font-size:17px;}
+details.form-panel[open] summary{margin-bottom:10px;}
+details.form-panel label{display:block;color:var(--accent-light);font-weight:bold;margin-top:12px;}
+
+/* schedule timeline */
+.timeline{max-width:700px;margin:0 auto;padding-left:30px;border-left:2px solid var(--border);}
+.timeline-item{position:relative;margin-bottom:26px;background:linear-gradient(145deg,var(--card-top),var(--card-bottom));border:1px solid var(--border);border-radius:12px;padding:18px 22px;}
+.timeline-item::before{content:"";position:absolute;left:-39px;top:22px;width:14px;height:14px;border-radius:50%;background:#7554a7;border:2px solid var(--bg);}
+.timeline-item.done{opacity:0.55;}
+.timeline-item.done::before{background:var(--green);}
+.timeline-time{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:1px;}
+.timeline-item h3{color:#e9dcff;margin:6px 0;}
+.timeline-item p{color:var(--muted);font-size:14px;line-height:1.6;}
+
+/* project gallery */
+.project-links{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0 16px;}
+.project-links a{color:var(--accent);font-weight:bold;font-size:13px;text-decoration:none;}
+.project-links a:hover{text-decoration:underline;}
+.top-project{border-color:#fbbf24;box-shadow:0 10px 30px rgba(251,191,36,0.15);}
+
+/* CHOOSE PROBLEM */
+.choose-panel{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #39304e;}
+.choose-panel p{font-size:13px;margin-bottom:6px;}
+.choose-panel .btn{margin-top:6px;}
+
+/* ORGANIZER DASHBOARD */
+.org-bar{max-width:900px;margin:0 auto 25px;display:flex;justify-content:space-between;align-items:center;color:var(--green);font-weight:bold;}
+.form-container.org-box{max-width:900px;margin:0 auto 30px;}
+.org-box h3{color:#e9dcff;margin-bottom:6px;}
+.org-row{display:grid;grid-template-columns:1.2fr 1.1fr 1.6fr auto auto;gap:10px;align-items:center;padding:12px 0;border-top:1px solid #39304e;}
+.org-row input{margin:0;}
+.org-row .btn{padding:10px 16px;}
+.org-row .org-track{color:#c4b5fd;font-size:13px;}
+.btn.danger{background:linear-gradient(110deg,#dc2626,#9f1239);}
+.org-assign{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;}
+.org-assign .btn{height:48px;}
+.org-line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #39304e;color:#d5cbe8;}
+.assigned-problem{display:block;color:#fbbf24;font-size:13px;font-weight:bold;margin:10px 0 0;}
+@media(max-width:850px){.org-row,.org-assign{grid-template-columns:1fr;}}
+
+/* NO SEARCH RESULTS MESSAGE */
+.no-results{text-align:center;color:var(--accent);font-size:20px;font-weight:bold;background:linear-gradient(145deg,var(--card-top),var(--card-bottom));border:1px solid var(--border-strong);border-radius:15px;padding:35px 20px;margin:25px auto;max-width:600px;line-height:2;box-shadow:0 5px 25px rgba(147,51,234,0.15);}
+
+/* PAGE NAVIGATION */
+.page{display:none;min-height:calc(100vh - 200px);}
+.page.active{display:block;animation:pageFade 0.35s ease;}
+@keyframes pageFade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+nav a{padding:8px 14px;border-radius:8px;transition:0.3s;}
+nav a.active{color:white;background:linear-gradient(110deg,#9333ea,#6366f1);}
+
+/* ANNOUNCEMENTS */
+section.announcements{padding:40px 8% 10px !important;}
+.announce{max-width:800px;margin:0 auto 14px;padding:16px 20px;background:linear-gradient(145deg,var(--card-top),var(--card-bottom));border:1px solid var(--border-strong);border-left:4px solid #fbbf24;border-radius:12px;}
+.announce p{color:#e9dcff;margin-bottom:6px;line-height:1.6;}
+.announce small{color:#9690b1;font-size:12px;}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h1>HackMate</h1>
+    <nav aria-label="Main menu">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#matcher" data-page="matcher">Find Team</a>
+        <a href="#recruitment" data-page="recruitment">Recruitment</a>
+        <a href="#schedule" data-page="schedule">Schedule</a>
+        <a href="#problems" data-page="problems">Problems</a>
+        <a href="#projects" data-page="projects">Projects</a>
+        <a href="#submission" data-page="submission">Submit Project</a>
+        <a href="#organizer" data-page="organizer">Organizer</a>
+    </nav>
+</header>
+
+<main>
+
+<div class="page" id="home">
+
+<section class="hero">
+
+    <div class="hero-content">
+        <div class="hero-tag">✦ THE HACKATHON COMMUNITY</div>
+        <h2>Build. Connect.<br><span>Innovate Together.</span></h2>
+        <p>Find your perfect hackathon teammates, collaborate with talented developers, and turn your ideas into reality.</p>
+        <div class="hero-buttons">
+            <a href="#matcher" class="btn">Find Your Team →</a>
+            <a href="#recruitment" class="secondary-btn">Explore Teams</a>
+        </div>
+        <div class="hero-features">
+            <span>✦ Find Developers</span>
+            <span>✦ Build Teams</span>
+            <span>✦ Launch Projects</span>
+        </div>
+    </div>
+
+    <!-- FLOATING DASHBOARD -->
+    <div class="hero-visual">
+        <div class="glow-circle"></div>
+        <div class="floating-card main-card">
+            <div class="dashboard-heading">
+                <span>TEAM MATCHING</span>
+                <span class="live-dot">● LIVE</span>
+            </div>
+            <h3>Find your dream team</h3>
+            <p>Connect with talented people.</p>
+
+            <div class="person">
+                <div class="avatar avatar-one">R</div>
+                <div>
+                    <strong>Frontend Developer</strong>
+                    <small>React • CSS • JavaScript</small>
+                </div>
+                <span class="online">●</span>
+            </div>
+
+            <div class="person">
+                <div class="avatar avatar-two">A</div>
+                <div>
+                    <strong>Backend Developer</strong>
+                    <small>Python • Node.js • APIs</small>
+                </div>
+                <span class="online">●</span>
+            </div>
+
+            <div class="person">
+                <div class="avatar avatar-three">P</div>
+                <div>
+                    <strong>AI/ML Developer</strong>
+                    <small>Python • Machine Learning</small>
+                </div>
+                <span class="online">●</span>
+            </div>
+
+            <div class="match-footer">✨ Your next teammate is waiting!</div>
+        </div>
+
+        <div class="floating-badge badge-top">🚀 Build Something Amazing</div>
+        <div class="floating-badge badge-bottom">💜 Collaborate & Innovate</div>
+    </div>
+
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown">
+    <div class="countdown-label" id="cdLabel">SUBMISSIONS CLOSE IN</div>
+    <div class="countdown-boxes">
+        <div class="count-box"><span id="cdDays">0</span><small>DAYS</small></div>
+        <div class="count-box"><span id="cdHours">00</span><small>HOURS</small></div>
+        <div class="count-box"><span id="cdMins">00</span><small>MINUTES</small></div>
+        <div class="count-box"><span id="cdSecs">00</span><small>SECONDS</small></div>
+    </div>
+</section>
+
+<!-- ANNOUNCEMENTS -->
+<section class="announcements" id="announceSection" style="display:none;">
+    <h2 class="section-title">📢 Announcements</h2>
+    <div id="announceList"></div>
+</section>
+
+<!-- HOME INFO -->
+<section class="features">
+    <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Find Teammates</h3>
+        <p>Browse participants by name or skill and send a connection request.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Join a Team</h3>
+        <p>Check the recruitment board and request to join a team that needs your skills.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Submit Your Project</h3>
+        <p>Pitch your hackathon project and compete for sponsor prizes.</p>
+    </div>
+</section>
+
+</div>
+
+
+<!-- TEAM MATCHER -->
+<section id="matcher" class="page">
+
+    <h2 class="section-title">Participant Matchmaking Lounge</h2>
+    <p class="section-description">Find developers and designers based on their skills.</p>
+
+    <details class="form-panel">
+        <summary>＋ Register as a participant</summary>
+        <form id="registerForm">
+            <label for="regName">Your Name</label>
+            <input type="text" id="regName" placeholder="Enter your name" required>
+
+            <label for="regSkill">Main Skill</label>
+            <select id="regSkill" required>
+                <option value="">Choose your skill</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="AI/ML">AI/ML</option>
+                <option value="UI/UX">UI/UX</option>
+                <option value="Hardware/IoT">Hardware/IoT</option>
+            </select>
+
+            <label for="regLevel">Experience Level</label>
+            <select id="regLevel" required>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+
+            <label for="regBio">About You</label>
+            <textarea id="regBio" placeholder="What do you like building?" required></textarea>
+
+            <button type="submit" class="submit-btn">Add Me to the Lounge</button>
+        </form>
+        <p id="registerMessage" class="message"></p>
+    </details>
+
+    <div class="filter-box">
+        <input type="text" id="searchName" placeholder="Search participant name..." oninput="filterParticipants()">
+
+        <select id="skillFilter" onchange="filterParticipants()">
+            <option value="All">All Skills</option>
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="AI/ML">AI/ML</option>
+            <option value="UI/UX">UI/UX</option>
+            <option value="Hardware/IoT">Hardware/IoT</option>
+        </select>
+    </div>
+
+    <div class="card-container" id="participantList"></div>
+
+</section>
+
+
+<!-- RECRUITMENT BOARD -->
+<section id="recruitment" class="recruitment page">
+
+    <h2 class="section-title">Team Recruitment Board</h2>
+    <p class="section-description">Teams are grouped by the skill they need. Hover over a member to see what they're handling.</p>
+
+    <details class="form-panel">
+        <summary>＋ Create a team &amp; post what you need</summary>
+        <form id="teamForm">
+            <label for="newTeamName">Team Name</label>
+            <input type="text" id="newTeamName" placeholder="e.g. Team Bytecraft" required>
+
+            <label for="newTeamProject">Project Idea</label>
+            <input type="text" id="newTeamProject" placeholder="What are you building?" required>
+
+            <label for="newTeamSkill">Skill You Are Looking For</label>
+            <select id="newTeamSkill" required>
+                <option value="">Choose a skill</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="AI/ML">AI/ML</option>
+                <option value="UI/UX">UI/UX</option>
+                <option value="Hardware/IoT">Hardware/IoT</option>
+            </select>
+
+            <label for="newTeamLead">Your Name (Team Lead)</label>
+            <input type="text" id="newTeamLead" placeholder="Enter your name" required>
+
+            <label for="newTeamTask">What Will You Handle?</label>
+            <input type="text" id="newTeamTask" placeholder="e.g. Planning and backend APIs" required>
+
+            <button type="submit" class="submit-btn">Post Team</button>
+        </form>
+        <p id="teamMessage" class="message"></p>
+    </details>
+
+    <div class="board" id="teamList"></div>
+
+    <p id="joinMessage" class="message"></p>
+
+</section>
+
+
+<!-- SCHEDULE -->
+<section id="schedule" class="page">
+    <h2 class="section-title">Hackathon Schedule</h2>
+    <p class="section-description">Past events are marked in green. Organizers can edit this schedule from the Organizer page.</p>
+    <div class="timeline" id="timeline"></div>
+</section>
+
+
+<!-- PROBLEM STATEMENTS -->
+<section id="problems" class="page">
+    <h2 class="section-title">Problem Statements</h2>
+    <p class="section-description">Challenges set by the organizers. Team leaders can choose one problem for their team.</p>
+    <p id="chooseMessage" class="message"></p>
+    <div class="card-container" id="problemList"></div>
+</section>
+
+
+<!-- ORGANIZER DASHBOARD -->
+<section id="organizer" class="page">
+    <h2 class="section-title">Organizer Dashboard</h2>
+    <p class="section-description">Edit the schedule, deadline and problem statements.</p>
+
+    <div class="form-container" id="orgLogin">
+        <form id="orgLoginForm">
+            <label for="orgPass">Organizer Passcode</label>
+            <input type="password" id="orgPass" placeholder="Enter passcode" required>
+            <button type="submit" class="submit-btn">Unlock Dashboard</button>
+        </form>
+        <p id="orgLoginMessage" class="message"></p>
+    </div>
+
+    <div id="orgPanel" style="display:none;">
+
+        <div class="org-bar">
+            <span>✔ Organizer mode</span>
+            <button type="button" class="btn danger" id="orgLogout">Log Out</button>
+        </div>
+
+        <!-- DEADLINE -->
+        <div class="form-container org-box">
+            <h3>⏰ Submission Deadline</h3>
+            <label for="orgDeadline">Countdown ends at</label>
+            <input type="datetime-local" id="orgDeadline">
+            <button type="button" class="submit-btn" id="saveDeadline">Save Deadline</button>
+            <p id="deadlineMessage" class="message"></p>
+        </div>
+
+        <!-- SCHEDULE -->
+        <div class="form-container org-box">
+            <h3>📅 Schedule</h3>
+            <form id="addEventForm">
+                <label for="evTitle">New Event Title</label>
+                <input type="text" id="evTitle" placeholder="e.g. Workshop: Intro to APIs" required>
+                <label for="evTime">Date &amp; Time</label>
+                <input type="datetime-local" id="evTime" required>
+                <label for="evDesc">Description</label>
+                <input type="text" id="evDesc" placeholder="Short description" required>
+                <button type="submit" class="submit-btn">Add Event</button>
+            </form>
+            <p id="scheduleMessage" class="message"></p>
+            <div id="orgScheduleList"></div>
+        </div>
+
+        <!-- PROBLEM STATEMENTS -->
+        <div class="form-container org-box">
+            <h3>🧩 Problem Statements</h3>
+            <form id="addProblemForm">
+                <label for="prTitle">Title</label>
+                <input type="text" id="prTitle" placeholder="e.g. Clean Water Monitoring" required>
+                <label for="prTrack">Track</label>
+                <select id="prTrack" required>
+                <option value="Best FinTech Hack">Best FinTech Hack</option>
+                <option value="Best Healthcare AI">Best Healthcare AI</option>
+                <option value="Best Open Source Tool">Best Open Source Tool</option>
+                <option value="Open Track">Open Track</option>
+                </select>
+                <label for="prDesc">Description</label>
+                <textarea id="prDesc" placeholder="Describe the challenge..." required></textarea>
+                <button type="submit" class="submit-btn">Add Problem Statement</button>
+            </form>
+            <p id="problemMessage" class="message"></p>
+            <div id="orgProblemList"></div>
+        </div>
+
+        <!-- ASSIGN -->
+        <div class="form-container org-box">
+            <h3>📌 Assign Problem to Team</h3>
+            <div class="org-assign">
+                <div>
+                    <label for="assignTeam">Team</label>
+                    <select id="assignTeam"></select>
+                </div>
+                <div>
+                    <label for="assignProblem">Problem Statement</label>
+                    <select id="assignProblem"></select>
+                </div>
+                <button type="button" class="btn" id="assignBtn">Assign</button>
+            </div>
+            <p id="assignMessage" class="message"></p>
+            <div id="assignmentList"></div>
+        </div>
+
+        <!-- ANNOUNCEMENTS -->
+        <div class="form-container org-box">
+            <h3>📢 Announcements</h3>
+            <form id="announceForm">
+                <label for="announceText">Message for all participants</label>
+                <input type="text" id="announceText" placeholder="e.g. Lunch is served at 1 PM in the main hall" required>
+                <button type="submit" class="submit-btn">Post Announcement</button>
+            </form>
+            <p id="announceMessage" class="message"></p>
+            <div id="orgAnnounceList"></div>
+        </div>
+
+        <!-- EVENT DATA -->
+        <div class="form-container org-box">
+            <h3>🗂 Event Data</h3>
+            <button type="button" class="submit-btn" id="exportBtn">Download All Data (JSON)</button>
+            <button type="button" class="btn danger" id="resetBtn" style="margin-top:14px;">Reset All Data</button>
+            <p id="dataMessage" class="message"></p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PROJECT GALLERY -->
+<section id="projects" class="page">
+    <h2 class="section-title">Project Gallery</h2>
+    <p class="section-description">Browse submitted projects and upvote your favourites. The most upvoted project appears first.</p>
+
+    <div class="filter-box">
+        <select id="trackFilter" onchange="renderProjects()">
+            <option value="All">All Tracks</option>
+            <option value="Best FinTech Hack">Best FinTech Hack</option>
+            <option value="Best Healthcare AI">Best Healthcare AI</option>
+            <option value="Best Open Source Tool">Best Open Source Tool</option>
+        </select>
+    </div>
+
+    <div class="card-container" id="projectList"></div>
+</section>
+
+
+<!-- PROJECT SUBMISSION -->
+<section id="submission" class="page">
+
+    <h2 class="section-title">Project Pitch Submission</h2>
+    <p class="section-description">Submit your hackathon project and compete for sponsor prizes.</p>
+
+    <div class="form-container">
+
+        <form id="projectForm">
+
+            <label for="teamName">Team Name</label>
+            <input type="text" id="teamName" placeholder="Enter your team name" required>
+
+
+            <label for="projectTitle">Project Title</label>
+            <input type="text" id="projectTitle" placeholder="Enter your project title" required>
+
+            <label for="github">GitHub Repository URL</label>
+            <input type="url" id="github" placeholder="https://github.com/username/project" required>
+
+            <label for="demo">Live Demo Link</label>
+            <input type="url" id="demo" placeholder="https://yourproject.com" required>
+
+            <label for="video">Video Pitch URL</label>
+            <input type="url" id="video" placeholder="Enter video pitch link" required>
+
+            <label for="description">Project Description</label>
+            <textarea id="description" placeholder="Describe your project..." required></textarea>
+
+            <label for="track">Select Sponsor Track</label>
+            <select id="track" required>
+                <option value="">Choose Sponsor Category</option>
+                <option value="Best FinTech Hack">Best FinTech Hack</option>
+                <option value="Best Healthcare AI">Best Healthcare AI</option>
+                <option value="Best Open Source Tool">Best Open Source Tool</option>
+            </select>
+
+            <button type="submit" class="submit-btn">Submit Project</button>
+
+        </form>
+
+        <p id="successMessage" class="message"></p>
+        <p class="message"><a href="#projects" style="color:#c084fc;">View all submitted projects →</a></p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <h3>HackMate</h3>
+    <p>Connecting Hackers. Creating Innovations.</p>
+    <p>© 2026 HackMate | College Hackathon Project</p>
+</footer>
+
+
+<!-- JAVASCRIPT -->
+<script>
+// =====================================================
+// HackMate - basic JavaScript (CSE326 Units IV and V)
+// Uses: variables, functions, if/else, loops, arrays, objects,
+// strings, Date, DOM, events, localStorage, sessionStorage, JSON
+// =====================================================
+
+
+// ---------- 1. SETTINGS AND DEFAULT DATA ----------
+const PASSCODE = "mate2026";                  // organizer passcode
+const DEFAULT_DEADLINE = "2026-12-15T18:00";  // used until the organizer changes it
+const PREFIX = "hackmate_";                   // every saved key starts with this
+
+const pages = ["home", "matcher", "recruitment", "schedule", "problems", "projects", "submission", "organizer"];
+const skills = ["Frontend", "Backend", "AI/ML", "UI/UX", "Hardware/IoT"];
+const icons = ["🎨", "⚙️", "🤖", "✏️", "🔌"];
+const columnClasses = ["col-frontend", "col-backend", "col-aiml", "col-uiux", "col-hardware"];
+const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+// first-time data (arrays of objects)
+const defaultParticipants = [
+    { name: "Rahul Sharma", skill: "Frontend", level: "Intermediate", bio: "Interested in web development." },
+    { name: "Aman Verma", skill: "Backend", level: "Advanced", bio: "Passionate about server development." },
+    { name: "Priya Singh", skill: "AI/ML", level: "Intermediate", bio: "Interested in Artificial Intelligence." },
+    { name: "Neha Gupta", skill: "UI/UX", level: "Beginner", bio: "Creative UI/UX designer." },
+    { name: "Arjun Kumar", skill: "Hardware/IoT", level: "Intermediate", bio: "Works with Arduino and IoT devices." }
+];
+
+// the first member of every team is the team leader
+const defaultTeams = [
+    { name: "Team PixelForge", project: "Hackathon Event Tracker", skill: "Frontend", looking: "Frontend Developer", problemId: null, members: [
+        { name: "Nikhil Arora", role: "Backend Developer", task: "Building the REST API for events and schedules." },
+        { name: "Pooja Iyer", role: "UI Designer", task: "Creating wireframes and the colour system." } ] },
+    { name: "Team Innovators", project: "AI Healthcare Assistant", skill: "Backend", looking: "Backend Developer", problemId: null, members: [
+        { name: "Rohan Mehta", role: "Frontend Lead", task: "Building the patient dashboard and chat interface." },
+        { name: "Sneha Kapoor", role: "AI/ML Engineer", task: "Training the symptom-analysis model." },
+        { name: "Karan Malhotra", role: "Project Manager", task: "Planning tasks, deadlines and the final pitch." } ] },
+    { name: "Team NeuralNest", project: "Smart Study Planner", skill: "AI/ML", looking: "AI/ML Developer", problemId: null, members: [
+        { name: "Ishaan Bose", role: "Full-Stack Developer", task: "Connecting the web app to the recommendation engine." },
+        { name: "Lavanya Reddy", role: "Data Analyst", task: "Cleaning study-habit data and building features." } ] },
+    { name: "Team Coders", project: "Smart Finance App", skill: "UI/UX", looking: "UI/UX Designer", problemId: null, members: [
+        { name: "Anjali Nair", role: "Backend Developer", task: "Creating APIs for expense tracking and budgets." },
+        { name: "Vikram Rao", role: "Frontend Developer", task: "Implementing charts and the transaction screens." } ] },
+    { name: "Team Tech Warriors", project: "Smart Agriculture System", skill: "Hardware/IoT", looking: "Hardware Developer", problemId: null, members: [
+        { name: "Manish Yadav", role: "IoT Engineer", task: "Wiring soil-moisture sensors to the Arduino." },
+        { name: "Divya Joshi", role: "Data & Backend", task: "Storing sensor data and sending crop alerts." },
+        { name: "Tanya Bhatia", role: "UI Developer", task: "Designing the farmer-friendly monitoring dashboard." } ] }
+];
+
+const defaultProblems = [
+    { id: 1, title: "Rural Healthcare Access", track: "Best Healthcare AI", desc: "Build a tool that helps people in remote areas get basic health guidance and find nearby clinics." },
+    { id: 2, title: "Smarter Personal Finance", track: "Best FinTech Hack", desc: "Create an app that helps students track spending, save money and avoid online scams." },
+    { id: 3, title: "Open Source for Good", track: "Best Open Source Tool", desc: "Build a free developer tool that other hackathon teams can reuse." }
+];
+
+const defaultSchedule = [
+    { title: "Opening Ceremony", time: "2026-12-13T10:00", desc: "Theme reveal, rules and sponsor introductions." },
+    { title: "Team Formation", time: "2026-12-13T11:30", desc: "Use Find Team and the Recruitment board to build your squad." },
+    { title: "Hacking Begins", time: "2026-12-13T13:00", desc: "Start building! Commit often and keep your repo public." },
+    { title: "Mentor Sessions", time: "2026-12-14T11:00", desc: "Get feedback on your idea, code and pitch from mentors." },
+    { title: "Mid-Point Check-In", time: "2026-12-14T20:00", desc: "Quick progress update from every team." },
+    { title: "Submission Deadline", time: "2026-12-15T18:00", desc: "Submit your project on the Submit Project page. No late entries." },
+    { title: "Judging & Demos", time: "2026-12-15T19:00", desc: "Teams present their projects to the judges." },
+    { title: "Closing Ceremony & Prizes", time: "2026-12-15T21:00", desc: "Winners announced for every sponsor track." }
+];
+
+
+// ---------- 2. SAVING AND LOADING (localStorage + JSON) ----------
+function getData(key, defaultValue) {
+    let saved = localStorage.getItem(PREFIX + key);
+    if (saved === null) {
+        return defaultValue;
+    }
+    return JSON.parse(saved);                       // text -> array / object
+}
+
+function saveData(key, value) {
+    localStorage.setItem(PREFIX + key, JSON.stringify(value));   // array / object -> text
+}
+
+// load everything when the page opens
+let participants = getData("participants", defaultParticipants);
+let teams = getData("teams", defaultTeams);
+let problems = getData("problems", defaultProblems);
+let schedule = getData("schedule", defaultSchedule);
+let projects = getData("projects", []);
+let announcements = getData("announcements", []);
+let voted = getData("voted", []);       // ids of projects this browser already voted for
+let requested = [];                     // teams the visitor asked to join (this visit only)
+
+
+// ---------- 3. SMALL HELPER FUNCTIONS ----------
+// makes typed text safe before it is placed inside HTML
+function clean(text) {
+    text = String(text);
+    text = text.replace(/&/g, "&amp;");
+    text = text.replace(/</g, "&lt;");
+    text = text.replace(/>/g, "&gt;");
+    text = text.replace(/"/g, "&quot;");
+    return text;
+}
+
+// 5 -> "05"
+function pad(n) {
+    if (n < 10) {
+        return "0" + n;
+    }
+    return String(n);
+}
+
+// "2026-12-13T10:00" -> "SUN 13 DEC · 10:00 AM"
+function formatTime(text) {
+    let d = new Date(text);
+    if (isNaN(d)) {
+        return text;
+    }
+    let hours = d.getHours();
+    let ampm = "AM";
+    if (hours >= 12) {
+        ampm = "PM";
+    }
+    hours = hours % 12;
+    if (hours === 0) {
+        hours = 12;
+    }
+    return weekDays[d.getDay()] + " " + d.getDate() + " " + monthNames[d.getMonth()] + " · " + hours + ":" + pad(d.getMinutes()) + " " + ampm;
+}
+
+function findProblem(id) {
+    for (let i = 0; i < problems.length; i++) {
+        if (problems[i].id === id) {
+            return problems[i];
+        }
+    }
+    return null;
+}
+
+// the <option> tags for a list of all teams (value = position of the team in the array)
+function teamOptions() {
+    let html = "";
+    for (let i = 0; i < teams.length; i++) {
+        html += '<option value="' + i + '">' + clean(teams[i].name) + '</option>';
+    }
+    return html;
+}
+
+function getDeadlineText() {
+    return getData("deadline", DEFAULT_DEADLINE);
+}
+
+function sortSchedule() {
+    schedule.sort(function(a, b) {          // callback function (Unit V)
+        if (a.time > b.time) { return 1; }
+        if (a.time < b.time) { return -1; }
+        return 0;
+    });
+}
+
+// only normal web links are allowed as clickable links
+function isWebLink(url) {
+    return url.startsWith("http://") || url.startsWith("https://");
+}
+
+
+// ---------- 4. PAGE NAVIGATION (uses the #hash in the address bar) ----------
+function showPage(id) {
+    if (!pages.includes(id)) {
+        id = "home";
+    }
+
+    for (let i = 0; i < pages.length; i++) {
+        let page = document.getElementById(pages[i]);
+        if (pages[i] === id) {
+            page.classList.add("active");
+        } else {
+            page.classList.remove("active");
+        }
+    }
+
+    // highlight the matching menu link
+    let links = document.querySelectorAll("nav a");
+    for (let i = 0; i < links.length; i++) {
+        if (links[i].getAttribute("data-page") === id) {
+            links[i].classList.add("active");
+        } else {
+            links[i].classList.remove("active");
+        }
+    }
+
+    window.scrollTo(0, 0);
+
+    // refresh the content of the page we are opening
+    if (id === "home") { showAnnouncements(); }
+    if (id === "matcher") { filterParticipants(); }
+    if (id === "recruitment") { showTeams(); }
+    if (id === "schedule") { showSchedule(); }
+    if (id === "problems") { showProblems(); }
+    if (id === "projects") { renderProjects(); }
+    if (id === "organizer") { showOrganizer(); }
+}
+
+
+// ---------- 5. COUNTDOWN (Date object) ----------
+function updateCountdown() {
+    let deadline = new Date(getDeadlineText());
+    let diff = deadline - new Date();            // difference in milliseconds
+
+    if (diff <= 0) {
+        diff = 0;
+        document.getElementById("cdLabel").innerText = "SUBMISSIONS ARE CLOSED";
+    } else {
+        document.getElementById("cdLabel").innerText = "SUBMISSIONS CLOSE IN";
+    }
+
+    let totalSeconds = Math.floor(diff / 1000);
+    document.getElementById("cdDays").innerText = Math.floor(totalSeconds / 86400);
+    document.getElementById("cdHours").innerText = pad(Math.floor((totalSeconds % 86400) / 3600));
+    document.getElementById("cdMins").innerText = pad(Math.floor((totalSeconds % 3600) / 60));
+    document.getElementById("cdSecs").innerText = pad(totalSeconds % 60);
+}
+
+
+// ---------- 6. ANNOUNCEMENTS (shown on the home page) ----------
+function showAnnouncements() {
+    let html = "";
+    for (let i = announcements.length - 1; i >= 0; i--) {      // newest first
+        html += '<div class="announce"><p>' + clean(announcements[i].text) + '</p><small>' + announcements[i].time + '</small></div>';
+    }
+
+    document.getElementById("announceList").innerHTML = html;
+    if (html === "") {
+        document.getElementById("announceSection").style.display = "none";
+    } else {
+        document.getElementById("announceSection").style.display = "block";
+    }
+}
+
+
+// ---------- 7. FIND TEAM (participants) ----------
+function filterParticipants() {
+    let search = document.getElementById("searchName").value.toLowerCase().trim();
+    let skill = document.getElementById("skillFilter").value;
+    let html = "";
+
+    for (let i = 0; i < participants.length; i++) {
+        let p = participants[i];
+        let nameMatch = p.name.toLowerCase().includes(search);
+        let skillMatch = (skill === "All" || p.skill === skill);
+
+        if (nameMatch && skillMatch) {
+            html += '<div class="card participant">';
+            html += '<h3>' + clean(p.name) + '</h3>';
+            html += '<p>' + clean(p.bio) + '</p>';
+            html += '<span class="skill">' + p.skill + '</span>';
+            html += '<p>Experience: ' + p.level + '</p>';
+            html += '<button class="btn" onclick="connect(' + i + ')">Connect</button>';
+            html += '</div>';
+        }
+    }
+
+    if (html === "") {
+        html = '<p class="no-results">🔍 No Participants Found!<br>Sorry, we couldn\'t find anyone matching your search. Try another name or skill.</p>';
+    }
+    document.getElementById("participantList").innerHTML = html;
+}
+
+function connect(i) {
+    alert("Connection request sent to " + participants[i].name + "!");
+}
+
+function registerParticipant(event) {
+    event.preventDefault();               // stop the page from reloading
+
+    let name = document.getElementById("regName").value.trim();
+
+    participants.push({
+        name: name,
+        skill: document.getElementById("regSkill").value,
+        level: document.getElementById("regLevel").value,
+        bio: document.getElementById("regBio").value.trim()
+    });
+    saveData("participants", participants);
+
+    document.getElementById("registerMessage").innerText = "Welcome, " + name + "! You are now listed in the lounge.";
+    document.getElementById("registerForm").reset();
+    filterParticipants();
+}
+
+
+// ---------- 8. RECRUITMENT BOARD (teams) ----------
+function teamCard(i) {
+    let t = teams[i];
+    let html = '<div class="card">';
+    html += '<h3>' + clean(t.name) + '</h3>';
+    html += '<p>Project: ' + clean(t.project) + '</p>';
+    html += '<p>Looking for: ' + clean(t.looking) + '</p>';
+    html += '<span class="skill">' + t.skill + '</span>';
+
+    let problem = findProblem(t.problemId);
+    if (problem !== null) {
+        html += '<span class="assigned-problem">📌 Problem: ' + clean(problem.title) + '</span>';
+    }
+
+    // one circle per member; the details appear when the mouse is over it
+    html += '<div class="team-members"><span class="team-members-title">TEAM MEMBERS (hover)</span><div class="member-list">';
+    for (let m = 0; m < t.members.length; m++) {
+        let member = t.members[m];
+        html += '<div class="member" tabindex="0">';
+        html += '<div class="member-avatar">' + clean(member.name.charAt(0).toUpperCase()) + '</div>';
+        html += '<div class="member-tooltip"><strong>' + clean(member.name) + '</strong>';
+        html += '<span class="member-role">' + clean(member.role) + '</span>';
+        html += '<span class="member-task">' + clean(member.task) + '</span></div></div>';
+    }
+    html += '</div></div>';
+
+    if (requested.includes(i)) {
+        html += '<button class="btn" disabled>Request Sent</button>';
+    } else {
+        html += '<button class="btn" onclick="joinTeam(' + i + ')">Join Team</button>';
+    }
+    return html + '</div>';
+}
+
+function showTeams() {
+    let html = "";
+
+    for (let s = 0; s < skills.length; s++) {
+        let cards = "";
+        let count = 0;
+
+        for (let i = 0; i < teams.length; i++) {
+            if (teams[i].skill === skills[s]) {
+                cards += teamCard(i);
+                count++;
+            }
+        }
+
+        let word = " teams working";
+        if (count === 1) {
+            word = " team working";
+        }
+        if (count === 0) {
+            cards = '<div class="column-empty">No teams looking for this skill yet.</div>';
+        }
+
+        html += '<div class="board-column ' + columnClasses[s] + '">';
+        html += '<div class="column-header"><span>' + icons[s] + ' ' + skills[s] + '</span>';
+        html += '<span class="column-count">' + count + word + '</span></div>';
+        html += cards + '</div>';
+    }
+
+    document.getElementById("teamList").innerHTML = html;
+}
+
+function joinTeam(i) {
+    requested.push(i);
+    document.getElementById("joinMessage").innerText = "You have requested to join " + teams[i].name + "!";
+    showTeams();
+}
+
+function createTeam(event) {
+    event.preventDefault();
+
+    let skill = document.getElementById("newTeamSkill").value;
+    let lead = document.getElementById("newTeamLead").value.trim();
+
+    teams.push({
+        name: document.getElementById("newTeamName").value.trim(),
+        project: document.getElementById("newTeamProject").value.trim(),
+        skill: skill,
+        looking: skill + " teammate",
+        problemId: null,
+        members: [ { name: lead, role: "Team Lead", task: document.getElementById("newTeamTask").value.trim() } ]
+    });
+    saveData("teams", teams);
+
+    document.getElementById("teamMessage").innerText = "Team posted! It now appears in the " + skill + " column.";
+    document.getElementById("teamForm").reset();
+    showTeams();
+}
+
+
+// ---------- 9. SCHEDULE ----------
+function showSchedule() {
+    let html = "";
+    let now = new Date();
+
+    for (let i = 0; i < schedule.length; i++) {
+        let e = schedule[i];
+        let css = "timeline-item";
+        if (new Date(e.time) < now) {
+            css = "timeline-item done";          // this event is already over
+        }
+        html += '<div class="' + css + '"><div class="timeline-time">' + formatTime(e.time) + '</div>';
+        html += '<h3>' + clean(e.title) + '</h3><p>' + clean(e.desc) + '</p></div>';
+    }
+
+    if (html === "") {
+        html = '<p class="section-description">No events scheduled yet.</p>';
+    }
+    document.getElementById("timeline").innerHTML = html;
+}
+
+
+// ---------- 10. PROBLEM STATEMENTS ----------
+function showProblems() {
+    let html = "";
+
+    for (let i = 0; i < problems.length; i++) {
+        let p = problems[i];
+        html += '<div class="card"><h3>' + clean(p.title) + '</h3>';
+        html += '<span class="skill">' + p.track + '</span>';
+        html += '<p>' + clean(p.desc) + '</p>';
+
+        // which teams are working on this problem?
+        let names = "";
+        for (let t = 0; t < teams.length; t++) {
+            if (teams[t].problemId === p.id) {
+                names += '<span class="skill">' + clean(teams[t].name) + '</span>';
+            }
+        }
+        if (names === "") {
+            html += '<p>Not assigned to any team yet.</p>';
+        } else {
+            html += '<p>Assigned teams:</p>' + names;
+        }
+
+        // "choose" button + hidden panel for the team leader
+        html += '<button class="btn" style="margin-top:14px;" onclick="togglePanel(' + i + ')">Choose this problem</button>';
+        html += '<div class="choose-panel" id="panel' + i + '">';
+        html += '<p>Team leaders only: pick your team and enter your name.</p>';
+        html += '<select id="chooseTeam' + i + '">' + teamOptions() + '</select>';
+        html += '<input type="text" id="chooseLeader' + i + '" placeholder="Team leader name">';
+        html += '<button class="btn" onclick="chooseProblem(' + i + ')">Confirm Choice</button>';
+        html += '<p class="message" id="chooseMsg' + i + '"></p></div></div>';
+    }
+
+    if (html === "") {
+        html = '<p class="no-results">🧩 No problem statements yet. Check back soon!</p>';
+    }
+    document.getElementById("problemList").innerHTML = html;
+}
+
+function togglePanel(i) {
+    let panel = document.getElementById("panel" + i);
+    if (panel.style.display === "block") {
+        panel.style.display = "none";
+    } else {
+        panel.style.display = "block";
+    }
+}
+
+function chooseProblem(i) {
+    let team = teams[document.getElementById("chooseTeam" + i).value];
+    let name = document.getElementById("chooseLeader" + i).value.trim().toLowerCase();
+    let message = document.getElementById("chooseMsg" + i);
+
+    if (team === undefined || name === "") {
+        message.innerText = "Pick your team and enter your name.";
+        return;
+    }
+
+    // only the leader (the first member) may choose
+    if (name !== team.members[0].name.toLowerCase()) {
+        message.innerText = "Only the team leader of " + team.name + " can choose a problem.";
+        return;
+    }
+
+    // a team can choose only one problem
+    if (team.problemId !== null) {
+        let current = findProblem(team.problemId);
+        let title = "a problem";
+        if (current !== null) {
+            title = '"' + current.title + '"';
+        }
+        message.innerText = team.name + " already chose " + title + ". Ask an organizer to change it.";
+        return;
+    }
+
+    team.problemId = problems[i].id;
+    saveData("teams", teams);
+    showProblems();
+    document.getElementById("chooseMessage").innerText = team.name + ' chose "' + problems[i].title + '"!';
+}
+
+
+// ---------- 11. PROJECT GALLERY AND VOTING ----------
+function renderProjects() {
+    let filter = document.getElementById("trackFilter").value;
+
+    let sorted = projects.slice();               // a copy, so the saved order does not change
+    sorted.sort(function(a, b) {
+        return b.votes - a.votes;                // most votes first
+    });
+
+    let html = "";
+    let shown = 0;
+
+    for (let i = 0; i < sorted.length; i++) {
+        let p = sorted[i];
+        if (filter !== "All" && p.track !== filter) {
+            continue;                            // skip projects of other tracks
+        }
+
+        let css = "card";
+        let trophy = "";
+        if (shown === 0 && p.votes > 0) {
+            css = "card top-project";
+            trophy = "🏆 ";
+        }
+        shown++;
+
+        html += '<div class="' + css + '"><h3>' + trophy + clean(p.title) + '</h3>';
+        html += '<p>Team: ' + clean(p.team) + '</p>';
+        html += '<span class="skill">' + p.track + '</span>';
+        html += '<p>' + clean(p.description) + '</p><div class="project-links">';
+        if (isWebLink(p.github)) { html += '<a href="' + clean(p.github) + '" target="_blank">GitHub ↗</a>'; }
+        if (isWebLink(p.demo)) { html += '<a href="' + clean(p.demo) + '" target="_blank">Live Demo ↗</a>'; }
+        if (isWebLink(p.video)) { html += '<a href="' + clean(p.video) + '" target="_blank">Video Pitch ↗</a>'; }
+        html += '</div>';
+
+        if (voted.includes(p.id)) {
+            html += '<button class="btn" disabled>▲ Voted · ' + p.votes + '</button>';
+        } else {
+            html += '<button class="btn" onclick="upvote(' + p.id + ')">▲ Upvote · ' + p.votes + '</button>';
+        }
+        html += '</div>';
+    }
+
+    if (html === "") {
+        html = '<p class="no-results">📭 No projects here yet! Be the first to submit one.</p>';
+    }
+    document.getElementById("projectList").innerHTML = html;
+}
+
+function upvote(id) {
+    if (voted.includes(id)) {
+        return;
+    }
+    for (let i = 0; i < projects.length; i++) {
+        if (projects[i].id === id) {
+            projects[i].votes = projects[i].votes + 1;
+        }
+    }
+    voted.push(id);
+    saveData("projects", projects);
+    saveData("voted", voted);
+    renderProjects();
+}
+
+
+// ---------- 12. SUBMIT A PROJECT ----------
+function submitProject(event) {
+    event.preventDefault();
+    let message = document.getElementById("successMessage");
+
+    // no new projects after the deadline
+    if (new Date() > new Date(getDeadlineText())) {
+        message.innerText = "Submissions are closed. The deadline has passed.";
+        return;
+    }
+
+    projects.push({
+        id: Date.now(),                          // current time in milliseconds = a unique number
+        team: document.getElementById("teamName").value.trim(),
+        title: document.getElementById("projectTitle").value.trim(),
+        github: document.getElementById("github").value.trim(),
+        demo: document.getElementById("demo").value.trim(),
+        video: document.getElementById("video").value.trim(),
+        track: document.getElementById("track").value,
+        description: document.getElementById("description").value.trim(),
+        votes: 0
+    });
+    saveData("projects", projects);
+
+    message.innerText = "Project submitted successfully! Best of luck!";
+    document.getElementById("projectForm").reset();
+}
+
+
+// ---------- 13. ORGANIZER: LOGIN ----------
+function login(event) {
+    event.preventDefault();
+
+    if (document.getElementById("orgPass").value === PASSCODE) {
+        sessionStorage.setItem(PREFIX + "organizer", "yes");     // remembered until the tab is closed
+        document.getElementById("orgLoginMessage").innerText = "";
+        document.getElementById("orgLoginForm").reset();
+        showOrganizer();
+    } else {
+        document.getElementById("orgLoginMessage").innerText = "Wrong passcode. Please try again.";
+    }
+}
+
+function logout() {
+    sessionStorage.removeItem(PREFIX + "organizer");
+    showOrganizer();
+}
+
+function showOrganizer() {
+    if (sessionStorage.getItem(PREFIX + "organizer") === "yes") {
+        document.getElementById("orgLogin").style.display = "none";
+        document.getElementById("orgPanel").style.display = "block";
+        document.getElementById("orgDeadline").value = getDeadlineText();
+        showScheduleEditor();
+        showProblemEditor();
+        showAssign();
+        showAnnounceEditor();
+    } else {
+        document.getElementById("orgLogin").style.display = "block";
+        document.getElementById("orgPanel").style.display = "none";
+    }
+}
+
+
+// ---------- 14. ORGANIZER: DEADLINE ----------
+function saveDeadline() {
+    let value = document.getElementById("orgDeadline").value;
+    if (value === "") {
+        document.getElementById("deadlineMessage").innerText = "Please choose a date and time.";
+        return;
+    }
+    saveData("deadline", value);
+    updateCountdown();
+    document.getElementById("deadlineMessage").innerText = "Deadline updated. The Home countdown now uses it.";
+}
+
+
+// ---------- 15. ORGANIZER: SCHEDULE ----------
+function showScheduleEditor() {
+    let html = "";
+    for (let i = 0; i < schedule.length; i++) {
+        let e = schedule[i];
+        html += '<div class="org-row">';
+        html += '<input type="text" id="editTitle' + i + '" value="' + clean(e.title) + '">';
+        html += '<input type="datetime-local" id="editTime' + i + '" value="' + e.time + '">';
+        html += '<input type="text" id="editDesc' + i + '" value="' + clean(e.desc) + '">';
+        html += '<button class="btn" onclick="saveEvent(' + i + ')">Save</button>';
+        html += '<button class="btn danger" onclick="deleteEvent(' + i + ')">Delete</button></div>';
+    }
+    if (html === "") {
+        html = '<p class="section-description">No events yet. Add one above.</p>';
+    }
+    document.getElementById("orgScheduleList").innerHTML = html;
+}
+
+function saveEvent(i) {
+    let title = document.getElementById("editTitle" + i).value.trim();
+    let time = document.getElementById("editTime" + i).value;
+
+    if (title === "" || time === "") {
+        document.getElementById("scheduleMessage").innerText = "Title and time are required.";
+        return;
+    }
+    schedule[i].title = title;
+    schedule[i].time = time;
+    schedule[i].desc = document.getElementById("editDesc" + i).value.trim();
+
+    sortSchedule();
+    saveData("schedule", schedule);
+    showScheduleEditor();
+    document.getElementById("scheduleMessage").innerText = "Event updated.";
+}
+
+function deleteEvent(i) {
+    schedule.splice(i, 1);                       // remove 1 item at position i
+    saveData("schedule", schedule);
+    showScheduleEditor();
+    document.getElementById("scheduleMessage").innerText = "Event deleted.";
+}
+
+function addEvent(event) {
+    event.preventDefault();
+
+    schedule.push({
+        title: document.getElementById("evTitle").value.trim(),
+        time: document.getElementById("evTime").value,
+        desc: document.getElementById("evDesc").value.trim()
+    });
+    sortSchedule();
+    saveData("schedule", schedule);
+    showScheduleEditor();
+    document.getElementById("addEventForm").reset();
+    document.getElementById("scheduleMessage").innerText = "Event added to the schedule.";
+}
+
+
+// ---------- 16. ORGANIZER: PROBLEM STATEMENTS ----------
+function showProblemEditor() {
+    let html = "";
+    for (let i = 0; i < problems.length; i++) {
+        let p = problems[i];
+        html += '<div class="org-row">';
+        html += '<input type="text" id="editPrTitle' + i + '" value="' + clean(p.title) + '">';
+        html += '<span class="org-track">' + p.track + '</span>';
+        html += '<input type="text" id="editPrDesc' + i + '" value="' + clean(p.desc) + '">';
+        html += '<button class="btn" onclick="saveProblem(' + i + ')">Save</button>';
+        html += '<button class="btn danger" onclick="deleteProblem(' + i + ')">Delete</button></div>';
+    }
+    if (html === "") {
+        html = '<p class="section-description">No problem statements yet. Add one above.</p>';
+    }
+    document.getElementById("orgProblemList").innerHTML = html;
+}
+
+function saveProblem(i) {
+    let title = document.getElementById("editPrTitle" + i).value.trim();
+    if (title === "") {
+        document.getElementById("problemMessage").innerText = "Title is required.";
+        return;
+    }
+    problems[i].title = title;
+    problems[i].desc = document.getElementById("editPrDesc" + i).value.trim();
+    saveData("problems", problems);
+    showOrganizer();
+    document.getElementById("problemMessage").innerText = "Problem statement updated.";
+}
+
+function deleteProblem(i) {
+    let id = problems[i].id;
+    problems.splice(i, 1);
+
+    // teams that had chosen this problem become free again
+    for (let t = 0; t < teams.length; t++) {
+        if (teams[t].problemId === id) {
+            teams[t].problemId = null;
+        }
+    }
+    saveData("problems", problems);
+    saveData("teams", teams);
+    showOrganizer();
+    document.getElementById("problemMessage").innerText = "Problem statement deleted.";
+}
+
+function addProblem(event) {
+    event.preventDefault();
+
+    problems.push({
+        id: Date.now(),
+        title: document.getElementById("prTitle").value.trim(),
+        track: document.getElementById("prTrack").value,
+        desc: document.getElementById("prDesc").value.trim()
+    });
+    saveData("problems", problems);
+    document.getElementById("addProblemForm").reset();
+    showOrganizer();
+    document.getElementById("problemMessage").innerText = "Problem statement added.";
+}
+
+
+// ---------- 17. ORGANIZER: ASSIGN A PROBLEM TO A TEAM ----------
+function showAssign() {
+    document.getElementById("assignTeam").innerHTML = teamOptions();
+
+    let options = "";
+    for (let i = 0; i < problems.length; i++) {
+        options += '<option value="' + problems[i].id + '">' + clean(problems[i].title) + '</option>';
+    }
+    document.getElementById("assignProblem").innerHTML = options;
+
+    // list of teams that already have a problem
+    let html = "";
+    for (let t = 0; t < teams.length; t++) {
+        let problem = findProblem(teams[t].problemId);
+        if (problem !== null) {
+            html += '<div class="org-line"><span>' + clean(teams[t].name) + '  →  ' + clean(problem.title) + '</span>';
+            html += '<button class="btn danger" onclick="unassign(' + t + ')">Unassign</button></div>';
+        }
+    }
+    document.getElementById("assignmentList").innerHTML = html;
+}
+
+function assignProblem() {
+    let team = teams[document.getElementById("assignTeam").value];
+    let problemId = Number(document.getElementById("assignProblem").value);    // text -> number
+
+    if (team === undefined || findProblem(problemId) === null) {
+        document.getElementById("assignMessage").innerText = "Pick a team and a problem statement first.";
+        return;
+    }
+    team.problemId = problemId;
+    saveData("teams", teams);
+    showAssign();
+    document.getElementById("assignMessage").innerText = team.name + " has been assigned a problem statement.";
+}
+
+function unassign(t) {
+    teams[t].problemId = null;
+    saveData("teams", teams);
+    showAssign();
+}
+
+
+// ---------- 18. ORGANIZER: ANNOUNCEMENTS ----------
+function showAnnounceEditor() {
+    let html = "";
+    for (let i = announcements.length - 1; i >= 0; i--) {
+        html += '<div class="org-line"><span>' + clean(announcements[i].text) + '</span>';
+        html += '<button class="btn danger" onclick="deleteAnnouncement(' + i + ')">Delete</button></div>';
+    }
+    document.getElementById("orgAnnounceList").innerHTML = html;
+}
+
+function addAnnouncement(event) {
+    event.preventDefault();
+
+    announcements.push({
+        text: document.getElementById("announceText").value.trim(),
+        time: new Date().toLocaleString()
+    });
+    saveData("announcements", announcements);
+    document.getElementById("announceForm").reset();
+    showAnnounceEditor();
+    showAnnouncements();
+    document.getElementById("announceMessage").innerText = "Announcement posted on the Home page.";
+}
+
+function deleteAnnouncement(i) {
+    announcements.splice(i, 1);
+    saveData("announcements", announcements);
+    showAnnounceEditor();
+    showAnnouncements();
+}
+
+
+// ---------- 19. ORGANIZER: DOWNLOAD DATA AND RESET ----------
+function exportData() {
+    // which team chose which problem
+    let assignments = {};
+    for (let t = 0; t < teams.length; t++) {
+        if (teams[t].problemId !== null) {
+            assignments[teams[t].name] = teams[t].problemId;
+        }
+    }
+
+    let everything = {
+        exportedAt: new Date().toISOString(),
+        deadline: getDeadlineText(),
+        schedule: schedule,
+        problems: problems,
+        assignments: assignments,
+        participants: participants,
+        teams: teams,
+        projects: projects,
+        announcements: announcements
+    };
+
+    // turn the object into text and download it as a .json file
+    let text = JSON.stringify(everything, null, 2);
+    let link = document.createElement("a");
+    link.href = "data:application/json;charset=utf-8," + encodeURIComponent(text);
+    link.download = "hackmate-data.json";
+    link.click();
+
+    document.getElementById("dataMessage").innerText = "Data downloaded as hackmate-data.json.";
+}
+
+function resetAll() {
+    if (confirm("Delete ALL saved HackMate data (teams, projects, votes, schedule edits)?")) {
+        let keys = ["participants", "teams", "projects", "voted", "schedule", "problems", "announcements", "deadline"];
+        for (let i = 0; i < keys.length; i++) {
+            localStorage.removeItem(PREFIX + keys[i]);
+        }
+        location.reload();
+    }
+}
+
+
+// ---------- 20. EVENTS: CONNECT BUTTONS AND FORMS TO FUNCTIONS ----------
+window.addEventListener("hashchange", function() {
+    showPage(location.hash.replace("#", ""));
+});
+
+document.getElementById("registerForm").addEventListener("submit", registerParticipant);
+document.getElementById("teamForm").addEventListener("submit", createTeam);
+document.getElementById("projectForm").addEventListener("submit", submitProject);
+document.getElementById("orgLoginForm").addEventListener("submit", login);
+document.getElementById("orgLogout").addEventListener("click", logout);
+document.getElementById("saveDeadline").addEventListener("click", saveDeadline);
+document.getElementById("addEventForm").addEventListener("submit", addEvent);
+document.getElementById("addProblemForm").addEventListener("submit", addProblem);
+document.getElementById("assignBtn").addEventListener("click", assignProblem);
+document.getElementById("announceForm").addEventListener("submit", addAnnouncement);
+document.getElementById("exportBtn").addEventListener("click", exportData);
+document.getElementById("resetBtn").addEventListener("click", resetAll);
+
+
+// ---------- 21. START THE PAGE ----------
+sortSchedule();
+updateCountdown();
+setInterval(updateCountdown, 1000);        // run the countdown again every 1000 ms
+showPage(location.hash.replace("#", ""));
+</script>
+
+</body>
+</html>
