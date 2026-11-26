@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!-- HackMate - same look and features, written with basic CSE326 (Unit I-V) code -->
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HackMate - Hackathon Platform</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h1>HackMate</h1>
+    <nav aria-label="Main menu">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#matcher" data-page="matcher">Find Team</a>
+        <a href="#recruitment" data-page="recruitment">Recruitment</a>
+        <a href="#schedule" data-page="schedule">Schedule</a>
+        <a href="#problems" data-page="problems">Problems</a>
+        <a href="#projects" data-page="projects">Projects</a>
+        <a href="#submission" data-page="submission">Submit Project</a>
+        <a href="#organizer" data-page="organizer">Organizer</a>
+    </nav>
+</header>
+
+<main>
+
+<div class="page" id="home">
+
+<section class="hero">
+
+    <div class="hero-content">
+        <div class="hero-tag">✦ THE HACKATHON COMMUNITY</div>
+        <h2>Build. Connect.<br><span>Innovate Together.</span></h2>
+        <p>Find your perfect hackathon teammates, collaborate with talented developers, and turn your ideas into reality.</p>
+        <div class="hero-buttons">
+            <a href="#matcher" class="btn">Find Your Team →</a>
+            <a href="#recruitment" class="secondary-btn">Explore Teams</a>
+        </div>
+        <div class="hero-features">
+            <span>✦ Find Developers</span>
+            <span>✦ Build Teams</span>
+            <span>✦ Launch Projects</span>
+        </div>
+    </div>
+
+    <!-- FLOATING DASHBOARD -->
+    <div class="hero-visual">
+        <div class="glow-circle"></div>
+        <div class="floating-card main-card">
+            <div class="dashboard-heading">
+                <span>TEAM MATCHING</span>
+                <span class="live-dot">● LIVE</span>
+            </div>
+            <h3>Find your dream team</h3>
+            <p>Connect with talented people.</p>
+
+            <div class="person">
+                <div class="avatar avatar-one">R</div>
+                <div>
+                    <strong>Frontend Developer</strong>
+                    <small>React • CSS • JavaScript</small>
+                </div>
+                <span class="online">●</span>
+            </div>
+
+            <div class="person">
+                <div class="avatar avatar-two">A</div>
+                <div>
+                    <strong>Backend Developer</strong>
+                    <small>Python • Node.js • APIs</small>
+                </div>
+                <span class="online">●</span>
+            </div>
+
+            <div class="person">
+                <div class="avatar avatar-three">P</div>
+                <div>
+                    <strong>AI/ML Developer</strong>
+                    <small>Python • Machine Learning</small>
+                </div>
+                <span class="online">●</span>
+            </div>
+
+            <div class="match-footer">✨ Your next teammate is waiting!</div>
+        </div>
+
+        <div class="floating-badge badge-top">🚀 Build Something Amazing</div>
+        <div class="floating-badge badge-bottom">💜 Collaborate & Innovate</div>
+    </div>
+
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown">
+    <div class="countdown-label" id="cdLabel">SUBMISSIONS CLOSE IN</div>
+    <div class="countdown-boxes">
+        <div class="count-box"><span id="cdDays">0</span><small>DAYS</small></div>
+        <div class="count-box"><span id="cdHours">00</span><small>HOURS</small></div>
+        <div class="count-box"><span id="cdMins">00</span><small>MINUTES</small></div>
+        <div class="count-box"><span id="cdSecs">00</span><small>SECONDS</small></div>
+    </div>
+</section>
+
+<!-- ANNOUNCEMENTS -->
+<section class="announcements" id="announceSection" style="display:none;">
+    <h2 class="section-title">📢 Announcements</h2>
+    <div id="announceList"></div>
+</section>
+
+<!-- HOME INFO -->
+<section class="features">
+    <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Find Teammates</h3>
+        <p>Browse participants by name or skill and send a connection request.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Join a Team</h3>
+        <p>Check the recruitment board and request to join a team that needs your skills.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Submit Your Project</h3>
+        <p>Pitch your hackathon project and compete for sponsor prizes.</p>
+    </div>
+</section>
+
+</div>
+
+
+<!-- TEAM MATCHER -->
+<section id="matcher" class="page">
+
+    <h2 class="section-title">Participant Matchmaking Lounge</h2>
+    <p class="section-description">Find developers and designers based on their skills.</p>
+
+    <details class="form-panel">
+        <summary>＋ Register as a participant</summary>
+        <form id="registerForm">
+            <label for="regName">Your Name</label>
+            <input type="text" id="regName" placeholder="Enter your name" required>
+
+            <label for="regSkill">Main Skill</label>
+            <select id="regSkill" required>
+                <option value="">Choose your skill</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="AI/ML">AI/ML</option>
+                <option value="UI/UX">UI/UX</option>
+                <option value="Hardware/IoT">Hardware/IoT</option>
+            </select>
+
+            <label for="regLevel">Experience Level</label>
+            <select id="regLevel" required>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+
+            <label for="regBio">About You</label>
+            <textarea id="regBio" placeholder="What do you like building?" required></textarea>
+
+            <button type="submit" class="submit-btn">Add Me to the Lounge</button>
+        </form>
+        <p id="registerMessage" class="message"></p>
+    </details>
+
+    <div class="filter-box">
+        <input type="text" id="searchName" placeholder="Search participant name..." oninput="filterParticipants()">
+
+        <select id="skillFilter" onchange="filterParticipants()">
+            <option value="All">All Skills</option>
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="AI/ML">AI/ML</option>
+            <option value="UI/UX">UI/UX</option>
+            <option value="Hardware/IoT">Hardware/IoT</option>
+        </select>
+    </div>
+
+    <div class="card-container" id="participantList"></div>
+
+</section>
+
+
+<!-- RECRUITMENT BOARD -->
+<section id="recruitment" class="recruitment page">
+
+    <h2 class="section-title">Team Recruitment Board</h2>
+    <p class="section-description">Teams are grouped by the skill they need. Hover over a member to see what they're handling.</p>
+
+    <details class="form-panel">
+        <summary>＋ Create a team &amp; post what you need</summary>
+        <form id="teamForm">
+            <label for="newTeamName">Team Name</label>
+            <input type="text" id="newTeamName" placeholder="e.g. Team Bytecraft" required>
+
+            <label for="newTeamProject">Project Idea</label>
+            <input type="text" id="newTeamProject" placeholder="What are you building?" required>
+
+            <label for="newTeamSkill">Skill You Are Looking For</label>
+            <select id="newTeamSkill" required>
+                <option value="">Choose a skill</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="AI/ML">AI/ML</option>
+                <option value="UI/UX">UI/UX</option>
+                <option value="Hardware/IoT">Hardware/IoT</option>
+            </select>
+
+            <label for="newTeamLead">Your Name (Team Lead)</label>
+            <input type="text" id="newTeamLead" placeholder="Enter your name" required>
+
+            <label for="newTeamTask">What Will You Handle?</label>
+            <input type="text" id="newTeamTask" placeholder="e.g. Planning and backend APIs" required>
+
+            <button type="submit" class="submit-btn">Post Team</button>
+        </form>
+        <p id="teamMessage" class="message"></p>
+    </details>
+
+    <div class="board" id="teamList"></div>
+
+    <p id="joinMessage" class="message"></p>
+
+</section>
+
+
+<!-- SCHEDULE -->
+<section id="schedule" class="page">
+    <h2 class="section-title">Hackathon Schedule</h2>
+    <p class="section-description">Past events are marked in green. Organizers can edit this schedule from the Organizer page.</p>
+    <div class="timeline" id="timeline"></div>
+</section>
+
+
+<!-- PROBLEM STATEMENTS -->
+<section id="problems" class="page">
+    <h2 class="section-title">Problem Statements</h2>
+    <p class="section-description">Challenges set by the organizers. Team leaders can choose one problem for their team.</p>
+    <p id="chooseMessage" class="message"></p>
+    <div class="card-container" id="problemList"></div>
+</section>
+
+
+<!-- ORGANIZER DASHBOARD -->
+<section id="organizer" class="page">
+    <h2 class="section-title">Organizer Dashboard</h2>
+    <p class="section-description">Edit the schedule, deadline and problem statements.</p>
+
+    <div class="form-container" id="orgLogin">
+        <form id="orgLoginForm">
+            <label for="orgPass">Organizer Passcode</label>
+            <input type="password" id="orgPass" placeholder="Enter passcode" required>
+            <button type="submit" class="submit-btn">Unlock Dashboard</button>
+        </form>
+        <p id="orgLoginMessage" class="message"></p>
+    </div>
+
+    <div id="orgPanel" style="display:none;">
+
+        <div class="org-bar">
+            <span>✔ Organizer mode</span>
+            <button type="button" class="btn danger" id="orgLogout">Log Out</button>
+        </div>
+
+        <!-- DEADLINE -->
+        <div class="form-container org-box">
+            <h3>⏰ Submission Deadline</h3>
+            <label for="orgDeadline">Countdown ends at</label>
+            <input type="datetime-local" id="orgDeadline">
+            <button type="button" class="submit-btn" id="saveDeadline">Save Deadline</button>
+            <p id="deadlineMessage" class="message"></p>
+        </div>
+
+        <!-- SCHEDULE -->
+        <div class="form-container org-box">
+            <h3>📅 Schedule</h3>
+            <form id="addEventForm">
+                <label for="evTitle">New Event Title</label>
+                <input type="text" id="evTitle" placeholder="e.g. Workshop: Intro to APIs" required>
+                <label for="evTime">Date &amp; Time</label>
+                <input type="datetime-local" id="evTime" required>
+                <label for="evDesc">Description</label>
+                <input type="text" id="evDesc" placeholder="Short description" required>
+                <button type="submit" class="submit-btn">Add Event</button>
+            </form>
+            <p id="scheduleMessage" class="message"></p>
+            <div id="orgScheduleList"></div>
+        </div>
+
+        <!-- PROBLEM STATEMENTS -->
+        <div class="form-container org-box">
+            <h3>🧩 Problem Statements</h3>
+            <form id="addProblemForm">
+                <label for="prTitle">Title</label>
+                <input type="text" id="prTitle" placeholder="e.g. Clean Water Monitoring" required>
+                <label for="prTrack">Track</label>
+                <select id="prTrack" required>
+                <option value="Best FinTech Hack">Best FinTech Hack</option>
+                <option value="Best Healthcare AI">Best Healthcare AI</option>
+                <option value="Best Open Source Tool">Best Open Source Tool</option>
+                <option value="Open Track">Open Track</option>
+                </select>
+                <label for="prDesc">Description</label>
+                <textarea id="prDesc" placeholder="Describe the challenge..." required></textarea>
+                <button type="submit" class="submit-btn">Add Problem Statement</button>
+            </form>
+            <p id="problemMessage" class="message"></p>
+            <div id="orgProblemList"></div>
+        </div>
+
+        <!-- ASSIGN -->
+        <div class="form-container org-box">
+            <h3>📌 Assign Problem to Team</h3>
+            <div class="org-assign">
+                <div>
+                    <label for="assignTeam">Team</label>
+                    <select id="assignTeam"></select>
+                </div>
+                <div>
+                    <label for="assignProblem">Problem Statement</label>
+                    <select id="assignProblem"></select>
+                </div>
+                <button type="button" class="btn" id="assignBtn">Assign</button>
+            </div>
+            <p id="assignMessage" class="message"></p>
+            <div id="assignmentList"></div>
+        </div>
+
+        <!-- ANNOUNCEMENTS -->
+        <div class="form-container org-box">
+            <h3>📢 Announcements</h3>
+            <form id="announceForm">
+                <label for="announceText">Message for all participants</label>
+                <input type="text" id="announceText" placeholder="e.g. Lunch is served at 1 PM in the main hall" required>
+                <button type="submit" class="submit-btn">Post Announcement</button>
+            </form>
+            <p id="announceMessage" class="message"></p>
+            <div id="orgAnnounceList"></div>
+        </div>
+
+        <!-- EVENT DATA -->
+        <div class="form-container org-box">
+            <h3>🗂 Event Data</h3>
+            <button type="button" class="submit-btn" id="exportBtn">Download All Data (JSON)</button>
+            <button type="button" class="btn danger" id="resetBtn" style="margin-top:14px;">Reset All Data</button>
+            <p id="dataMessage" class="message"></p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PROJECT GALLERY -->
+<section id="projects" class="page">
+    <h2 class="section-title">Project Gallery</h2>
+    <p class="section-description">Browse submitted projects and upvote your favourites. The most upvoted project appears first.</p>
+
+    <div class="filter-box">
+        <select id="trackFilter" onchange="renderProjects()">
+            <option value="All">All Tracks</option>
+            <option value="Best FinTech Hack">Best FinTech Hack</option>
+            <option value="Best Healthcare AI">Best Healthcare AI</option>
+            <option value="Best Open Source Tool">Best Open Source Tool</option>
+        </select>
+    </div>
+
+    <div class="card-container" id="projectList"></div>
+</section>
+
+
+<!-- PROJECT SUBMISSION -->
+<section id="submission" class="page">
+
+    <h2 class="section-title">Project Pitch Submission</h2>
+    <p class="section-description">Submit your hackathon project and compete for sponsor prizes.</p>
+
+    <div class="form-container">
+
+        <form id="projectForm">
+
+            <label for="teamName">Team Name</label>
+            <input type="text" id="teamName" placeholder="Enter your team name" required>
+
+
+            <label for="projectTitle">Project Title</label>
+            <input type="text" id="projectTitle" placeholder="Enter your project title" required>
+
+            <label for="github">GitHub Repository URL</label>
+            <input type="url" id="github" placeholder="https://github.com/username/project" required>
+
+            <label for="demo">Live Demo Link</label>
+            <input type="url" id="demo" placeholder="https://yourproject.com" required>
+
+            <label for="video">Video Pitch URL</label>
+            <input type="url" id="video" placeholder="Enter video pitch link" required>
+
+            <label for="description">Project Description</label>
+            <textarea id="description" placeholder="Describe your project..." required></textarea>
+
+            <label for="track">Select Sponsor Track</label>
+            <select id="track" required>
+                <option value="">Choose Sponsor Category</option>
+                <option value="Best FinTech Hack">Best FinTech Hack</option>
+                <option value="Best Healthcare AI">Best Healthcare AI</option>
+                <option value="Best Open Source Tool">Best Open Source Tool</option>
+            </select>
+
+            <button type="submit" class="submit-btn">Submit Project</button>
+
+        </form>
+
+        <p id="successMessage" class="message"></p>
+        <p class="message"><a href="#projects" style="color:#c084fc;">View all submitted projects →</a></p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <h3>HackMate</h3>
+    <p>Connecting Hackers. Creating Innovations.</p>
+    <p>© 2026 HackMate | College Hackathon Project</p>
+</footer>
+
+
+<!-- JAVASCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
